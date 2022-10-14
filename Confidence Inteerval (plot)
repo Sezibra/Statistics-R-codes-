@@ -1,0 +1,12 @@
+plot(mean(chowPopulation)+c(-7,7),c(1,1),type="n",
+     xlab="weight",ylab="interval",ylim=c(1,B))
+abline(v=mean(chowPopulation))
+for (i in 1:B) {
+  chow <- sample(chowPopulation,N)
+  se <- sd(chow)/sqrt(N)
+  interval <- c(mean(chow)-Q*se, mean(chow)+Q*se)
+  covered <- 
+    mean(chowPopulation) <= interval[2] & mean(chowPopulation) >= interval[1]
+  color <- ifelse(covered,1,2)
+  lines(interval, c(i,i),col=color)
+}
